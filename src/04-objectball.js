@@ -57,7 +57,7 @@ function gameObject() {
         }
     },
         "away": {
-            teamName: 'Charlotte Hornets',
+            teamName: 'Charolotte Hornets',
             colors: ['Turquoise' , 'Purple'],
             players: {
                 'Jeff Adrien': {
@@ -114,3 +114,97 @@ function gameObject() {
         }
     }
 }
+
+
+// variables for our use
+// home team
+let homeTeam = gameObject().home
+// away team
+let awayTeam = gameObject().away
+// all players
+let allPlayers = {...awayTeam["players"], ...homeTeam["players"]}
+
+
+// console.log("Home", homeTeam)
+// console.log("away", awayTeam)
+// console.log("players", allPlayers)
+
+// Build a function, numPointsScored that takes in an argument of a player's name and returns the number of points scored for that player.
+
+// function numPointsScored(playerName){
+//     // if statement that checks if the player is in the home team through bracket notation, if the player is not on the home team then we run the same function with the away team. if it can't find any player
+//     for (let player in allPlayers){
+//         if (player === playerName) return allPlayers[player].points
+//     }
+// }
+
+function numPointsScored(name){
+    return allPlayers[name].points
+}
+
+// console.log(numPointsScored("Brendan Haywood"))
+
+function shoeSize(name){
+    return allPlayers[name].shoe
+}
+
+// console.log(shoeSize("Brendan Haywood"))
+
+function teamColors(name){
+    return homeTeam.teamName === name ? homeTeam.colors : awayTeam.colors
+}
+
+// console.log(teamColors('Brooklyn Nets'))
+
+// Build a function, teamNames, that operates on the game object to return an array of the team names.
+
+function teamNames(){
+    return [homeTeam.teamName, awayTeam.teamName]
+}
+
+// console.log(teamNames())
+
+// Build a function, playerNumbers, that takes in an argument of a team name and returns an array of the jersey number's for that team.
+
+function playerNumbers(name){
+    let teamPlayers = (homeTeam.teamName === name) ? homeTeam.players : awayTeam.players
+    let playerNum = []
+    for (let player in teamPlayers){
+        playerNum.push(teamPlayers[player].number)
+    }
+    return playerNum
+}
+
+// console.log(playerNumbers('Charolotte Hornets'))
+
+// Build a function, playerStats, that takes in an argument of a player's name and returns a object of that player's stats. Check out the following example of the expected return value of the playerStats function
+const ap = allPlayers
+function playerStats(n){
+    return ap[n]
+}
+
+// console.log(playerStats("Brendan Haywood"))
+
+
+// Build a function, bigShoeRebounds, that will return the number of rebounds associated with the player that has the largest shoe size. Break this one down into steps:
+// First, find the player with the largest shoe size
+// Then, return that player's number of rebounds
+
+function bigShoe(){
+    let bigPlayer = { shoe: 0, player: null}
+    for (let x in allPlayers){
+        if (allPlayers[x].shoe > bigPlayer.shoe){
+            bigPlayer.shoe = allPlayers[x].shoe
+            bigPlayer.player = x
+        }
+    }
+    return bigPlayer
+}
+
+
+function bigShoeRebounds(){
+    return allPlayers[bigShoe().player].rebounds
+}
+
+console.log(bigShoeRebounds())
+// console.log(bigShoe()) { shoe: 19, player: 'Mason Plumlee' }
